@@ -1,0 +1,48 @@
+.wrapper-filtr {
+    display: flex;
+}
+
+.filter {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.wrapper-filtr {
+    position: relative;
+}
+
+.title-filter .tetx-filter {
+    font-weight: 600;
+    font-size: 16px;
+    color: #FF6A00;
+    margin-right: 5px;
+}
+
+.options {
+    border: none;
+    font-size: 17px;
+    padding: 10px 0;
+}
+
+.filter-list {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out;
+}
+
+.filter-list.open {
+    max-height: 200px;
+    /* Установите максимальную высоту в зависимости от контента */
+}
+
+.filter__list-inner {
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.filter__list-inner.visible {
+    opacity: 1;
+    transform: translateY(0);
+}

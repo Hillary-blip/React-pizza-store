@@ -1,0 +1,12 @@
+.product {
+    margin-top: 80px;
+}
+
+.sort-block {
+    display: flex;
+    justify-content: space-between;
+}
+
+.product-inner {
+    display: grid;
+}
