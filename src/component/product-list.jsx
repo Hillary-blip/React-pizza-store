@@ -1,11 +1,11 @@
+
 import { useState } from "react";
 import Category from "./category";
 import Filter from "./filter";
 import '../styles/product-list.css';
 import Cartproduct from "./cart-product";
 
-
-const ProductList = ({ showCart }) => {
+const ProductList = ({ cart, setCart, showCart, toggleCart, totalItems }) => {
     const products = [
         {
             id: 1,
@@ -89,11 +89,10 @@ const ProductList = ({ showCart }) => {
 
     ];
 
-    const [cart, setCart] = useState([]);
     const [selectedSizes, setSelectedSizes] = useState({});
     const [selectedTypes, setSelectedTypes] = useState({});
-
-    const [counter, setCounter] = useState(0)
+    const [sortOption, setSortOption] = useState("По умолчанию");
+    const [selectedCategory, setSelectedCategory] = useState("Все");
 
     const handleSizeChange = (productId, size) => {
         setSelectedSizes({
@@ -109,22 +108,45 @@ const ProductList = ({ showCart }) => {
         });
     };
 
+    // const AddtoCart = (product) => {
+    //     const size = selectedSizes[product.id] || product.sizes[0];
+    //     const type = selectedTypes[product.id] || product.types[0];
+    //     const newItem = {
+    //         id: product.id,
+    //         name: product.name,
+    //         size,
+    //         type,
+    //         price: product.price
+    //     };
+    //     setCart([...cart, newItem]); // используем setCart, переданный из App
+    // };
+
     const AddtoCart = (product) => {
-        const size = selectedSizes[product.id] || product.sizes[0]; // Выбранный или первый размер
-        const type = selectedTypes[product.id] || product.types[0]; // Выбранное или первое тесто
-        const newItem = {
-            id: product.id,
-            name: product.name,
-            size,
-            type,
-            price: product.price
-        };
-        setCart([...cart, newItem]);
+        const size = selectedSizes[product.id] || product.sizes[0];
+        const type = selectedTypes[product.id] || product.types[0];
+
+        const existingItemIndex = cart.findIndex(
+            (item) => item.id === product.id && item.size === size && item.type === type
+        );
+
+        if (existingItemIndex !== -1) {
+            // Если товар уже есть в корзине, увеличиваем его количество
+            const updatedCart = [...cart];
+            updatedCart[existingItemIndex].quantity += 1;
+            setCart(updatedCart);
+        } else {
+            // Если товара нет в корзине, добавляем его с количеством 1
+            const newItem = {
+                id: product.id,
+                name: product.name,
+                size,
+                type,
+                price: product.price,
+                quantity: 1
+            };
+            setCart([...cart, newItem]);
+        }
     };
-
-
-    const [sortOption, setSortOption] = useState("По умолчанию");
-    const [selectedCategory, setSelectedCategory] = useState("Все");
 
     const handleCategory = (category) => {
         setSelectedCategory(category);
@@ -148,12 +170,10 @@ const ProductList = ({ showCart }) => {
         return a.id - b.id;
     });
 
-
-
     return (
         <div className="product">
-            {showCart ? ( // Показываем корзину, если showCart равно true
-                <Cartproduct cart={cart} showCart={showCart} />
+            {showCart ? (
+                <Cartproduct cart={cart} showCart={showCart} toggleCart={toggleCart} />
             ) : (
                 <>
                     <div className="sort-block">
@@ -199,10 +219,12 @@ const ProductList = ({ showCart }) => {
                                 <div className="price">
                                     <span>от {product.price} ₽</span>
                                 </div>
-
-                                <button className="add-button" onClick={() => AddtoCart(product)}>
-                                    Добавить
-                                </button>
+                                <div className="block__btn-add">
+                                    <button className="add-button" onClick={() => AddtoCart(product)}>
+                                        Добавить
+                                    </button>
+                                    <span>{cart.find(item => item.id === product.id)?.quantity  || 0}</span>
+                                </div>
                             </div>
                         ))}
                     </div>
@@ -210,60 +232,7 @@ const ProductList = ({ showCart }) => {
             )}
         </div>
     );
-
 };
 
 export default ProductList;
 
-
-
-
-
-
-// <div className="product">
-//     <div className="sort-block">
-//         <Category onSelectCategory={handleCategory} selectedCategory={selectedCategory} />
-//         <Filter onSortChange={handleSortChange} />
-//     </div>
-//     <h1 className="title-content">Все пиццы</h1>
-//     <div className="product-inner">
-//         {sortedAndFilteredProducts.map((product) => (
-//             <div className="product-content" key={product.id}>
-//                 <img src={product.image} alt={product.name} className="product-image" />
-//                 <h2 className="name-pizza">{product.name}</h2>
-//                 <p className="product-description">{product.description}</p>
-
-//                 <div className="types">
-//                     <ul className="list-types">
-//                         {product.types.map((type, index) => (
-//                             <li key={index} className={`types-inner ${selectedTypes[product.id] === type ? 'active' : ''}`}
-//                                 onClick={() => handleTypeChange(product.id, type)}
-//                             >
-//                                 {type}
-//                             </li>
-//                         ))}
-//                     </ul>
-//                 </div>
-
-//                 <div className="size">
-//                     <ul className="list-sizes">
-//                         {product.sizes.map((size, index) => (
-//                             <li key={index} className={`size-inner ${selectedSizes[product.id] === size ? 'active' : ''}`}
-//                                 onClick={() => handleSizeChange(product.id, size)}
-//                             >
-//                                 {size}
-//                             </li>
-//                         ))}
-//                     </ul>
-//                 </div>
-
-//                 <div className="price">
-//                     <span>от {product.price} ₽</span>
-//                 </div>
-
-//                 <button className="add-button" onClick={() => AddtoCart(product)}>Добавить</button>
-//             </div>
-//         ))}
-//     </div>
-//     <Cartproduct cart={cart}></Cartproduct>
-// </div>

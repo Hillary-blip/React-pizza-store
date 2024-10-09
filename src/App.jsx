@@ -1,14 +1,15 @@
+
 import Header from './component/header';
 import './App.css';
 import ProductList from './component/product-list';
 import { useState } from 'react';
 
 function App() {
-  const [cartModal, setShowCart] = useState(false); // по умолчанию корзина скрыта
+  const [cartModal, setShowCart] = useState(false);
   const [cart, setCart] = useState([]);
+  const totalItems = cart.reduce((total, item) => total + item.quantity, 0)
+  const totalPrice = cart.reduce((total, item) => total + item.price * item.quantity, 0)
 
-  const totalItems = cart.length;
-  const totalPrice = cart.reduce((total, item) => total + item.price, 0);
 
   const toggleCart = () => {
     setShowCart(prev => !prev);
@@ -19,12 +20,18 @@ function App() {
       <header>
         <div className="container">
           <Header showCart={cartModal} toggleCart={toggleCart}
-            totalItems={totalItems} // Передаём общее количество товаров
+            totalItems={totalItems}
             totalPrice={totalPrice}
           />
           <main>
             <div className="main-inner">
-              <ProductList totalItems={totalItems} cart={cart} setCart={setCart} showCart={cartModal} />
+              <ProductList
+                totalItems={totalItems}
+                cart={cart}
+                setCart={setCart}
+                showCart={cartModal}
+                toggleCart={toggleCart}
+              />
             </div>
           </main>
         </div>

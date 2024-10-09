@@ -13,11 +13,22 @@
     gap: 35px;
 }
 
+.title-content {
+    margin: 25px 0 35px 0;
+}
+
 .product-content {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.product-description {
+    max-width: 300px;
+    text-align: center;
+    margin: 10px 0;
+    font-weight: 600;
 }
 
 .name-pizza {
@@ -34,6 +45,8 @@
     max-height: 87px;
     font-size: 14px;
     padding: 5px;
+    font-weight: 700;
+    width: 100%;
 }
 
 .list-types,
