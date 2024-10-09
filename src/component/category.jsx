@@ -2,7 +2,7 @@ import React from "react";
 import '../styles/category.css';
 
 const Category = ({ onSelectCategory, selectedCategory }) => {
-    const categories = ["Все", "Мясные", "Вегетарианская", "Грили"];
+    const categories = ["Все", "Мясные", "Вегетарианская", "Гриль"];
 
     return (
         <div className="category-filter">

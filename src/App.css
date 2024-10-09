@@ -1,7 +1,13 @@
+body {
+  background-color: #ffd27f;
+}
+
 .container {
-  margin: 0 auto;
+  margin: 30px auto;
   max-width: 1220px;
   padding: 20px;
+  border-radius: 20px;
+  background-color: #fff;
 }
 
 h1,
@@ -20,5 +26,5 @@ a {
 
 ul,
 li {
-  list-style-type:none;
+  list-style-type: none;
 }

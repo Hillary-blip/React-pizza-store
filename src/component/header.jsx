@@ -12,12 +12,9 @@ const Header = ({ showCart, toggleCart, totalItems, totalPrice }) => {
                         <p className="text-header">самая вкусная пицца во вселенной</p>
                     </div>
                 </div>
-                {/* <button onClick={toggleCart}>
-                    {showCart ? 'Скрыть корзину' : 'Показать корзину'}
-                </button> */}
+
             </div>
             {!showCart &&
-                // <HeaderCart  totalItems={totalItems} totalPrice={totalPrice}  onClick={toggleCart} />
 
                 <div className="cart-header" onClick={toggleCart}>
                     <div className="cart-price">
