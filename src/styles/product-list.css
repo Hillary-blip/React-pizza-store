@@ -85,3 +85,75 @@
     color: black;
     background: #fff;
 }
+
+
+#Add {
+    display: flex;
+    gap: 35px;
+    margin-top: 20px;
+    max-width: 285px;
+    width: 100%;
+}
+
+.price {
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.block__btn-add {
+    display: flex;
+    align-items: center;
+    max-width: 160px;
+    width: 100%;
+    padding: 8px 0;
+    max-height: 42px;
+    box-sizing: border-box;
+    border: 1px solid rgb(235, 90, 30);
+    border-radius: 30px;
+    background: rgb(255, 255, 255);
+    justify-content: center;
+    transition: all 0.4s;
+    font-size: 16px;
+    font-weight: 700;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.block__btn-add:hover button {
+    color: #fff;
+}
+
+.block__btn-add:hover span {
+    color: #fff;
+}
+
+.counter {
+    color: rgb(235, 90, 30);
+}
+
+.block__btn-add:hover {
+    color: #fff;
+    background-color: rgb(235, 90, 30);
+}
+
+
+.block__btn-add path {
+    transition: fill 0.8s;
+}
+
+.block__btn-add:hover path {
+    fill: #fff;
+    /* Цвет, который вы хотите при наведении, например черный */
+}
+
+.add-button {
+    border: none;
+    background-color: inherit;
+    color: rgb(235, 90, 30);
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.add-button:hover {
+    color: #fff;
+}

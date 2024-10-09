@@ -11,6 +11,10 @@ function App() {
   const totalPrice = cart.reduce((total, item) => total + item.price * item.quantity, 0)
 
 
+  const Cleaercart = () => {
+    setCart([])
+  }
+
   const toggleCart = () => {
     setShowCart(prev => !prev);
   }
@@ -26,7 +30,9 @@ function App() {
           <main>
             <div className="main-inner">
               <ProductList
+                Cleaercart={Cleaercart}
                 totalItems={totalItems}
+                totalPrice={totalPrice}
                 cart={cart}
                 setCart={setCart}
                 showCart={cartModal}

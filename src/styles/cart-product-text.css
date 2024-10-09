@@ -1,0 +1,45 @@
+.cart-item {
+    display: flex;
+    align-items: center;
+
+    justify-content: space-around;
+}
+
+.info-cart__item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    max-width: 375px;
+    width: 100%;
+}
+
+.img-cart__inner {
+    width: 80px;
+}
+
+.quantity-product {
+    display: flex;
+}
+
+.delete-product {
+    cursor: pointer;
+}
+
+.title-cart {
+    display: flex;
+    align-items: center;
+}
+
+.logo-cart {
+    display: flex;
+}
+
+.cleaer-logo {
+    display: flex;
+}
+
+.cleaer-caer {
+    background: inherit;
+    border: none;
+
+}

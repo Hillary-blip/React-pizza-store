@@ -1,11 +1,11 @@
-
 import { useState } from "react";
 import Category from "./category";
 import Filter from "./filter";
 import '../styles/product-list.css';
-import Cartproduct from "./cart-product";
+// import Cartproduct from "./cart-product";
+import CartProductText from "./cart-product-inner";
 
-const ProductList = ({ cart, setCart, showCart, toggleCart, totalItems }) => {
+const ProductList = ({ cart, setCart, showCart, toggleCart, totalPrice, totalItems, Cleaercart }) => {
     const products = [
         {
             id: 1,
@@ -108,19 +108,6 @@ const ProductList = ({ cart, setCart, showCart, toggleCart, totalItems }) => {
         });
     };
 
-    // const AddtoCart = (product) => {
-    //     const size = selectedSizes[product.id] || product.sizes[0];
-    //     const type = selectedTypes[product.id] || product.types[0];
-    //     const newItem = {
-    //         id: product.id,
-    //         name: product.name,
-    //         size,
-    //         type,
-    //         price: product.price
-    //     };
-    //     setCart([...cart, newItem]); // используем setCart, переданный из App
-    // };
-
     const AddtoCart = (product) => {
         const size = selectedSizes[product.id] || product.sizes[0];
         const type = selectedTypes[product.id] || product.types[0];
@@ -142,7 +129,8 @@ const ProductList = ({ cart, setCart, showCart, toggleCart, totalItems }) => {
                 size,
                 type,
                 price: product.price,
-                quantity: 1
+                quantity: 1,
+                img: product.image
             };
             setCart([...cart, newItem]);
         }
@@ -173,7 +161,16 @@ const ProductList = ({ cart, setCart, showCart, toggleCart, totalItems }) => {
     return (
         <div className="product">
             {showCart ? (
-                <Cartproduct cart={cart} showCart={showCart} toggleCart={toggleCart} />
+                // <Cartproduct cart={cart} showCart={showCart} toggleCart={toggleCart} Cleaercart={Cleaercart} />
+                <CartProductText
+                    totalItems={totalItems}
+                    totalPrice={totalPrice}
+                    cart={cart}
+                    showCart={showCart}
+                    toggleCart={toggleCart}
+                    Cleaercart={Cleaercart}
+                    setCart={setCart}
+                />
             ) : (
                 <>
                     <div className="sort-block">
@@ -216,14 +213,22 @@ const ProductList = ({ cart, setCart, showCart, toggleCart, totalItems }) => {
                                         </ul>
                                     </div>
                                 </div>
-                                <div className="price">
-                                    <span>от {product.price} ₽</span>
-                                </div>
-                                <div className="block__btn-add">
-                                    <button className="add-button" onClick={() => AddtoCart(product)}>
-                                        Добавить
-                                    </button>
-                                    <span>{cart.find(item => item.id === product.id)?.quantity  || 0}</span>
+                                <div id="Add">
+                                    <div className="price">
+                                        <span>от {product.price} ₽</span>
+                                    </div>
+                                    <div className="block__btn-add" onClick={() => AddtoCart(product)}>
+                                        <div class="icon">
+                                            <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                                                <path id="Vector" d="M10.8 4.79L7.2 4.79L7.2 1.2C7.2 0.53 6.66 0 6 0C5.33 0 4.79 0.53 4.79 1.2L4.79 4.79L1.2 4.79C0.53 4.79 0 5.33 0 6C0 6.66 0.53 7.2 1.2 7.2L4.79 7.2L4.79 10.8C4.79 11.46 5.33 12 6 12C6.66 12 7.2 11.46 7.2 10.8L7.2 7.2L10.8 7.2C11.46 7.2 12 6.66 12 6C12 5.33 11.46 4.79 10.8 4.79Z" fill="#EB5A1E" />
+                                            </svg>
+                                        </div>
+
+                                        <button className="add-button" >
+                                            Добавить
+                                        </button>
+                                        <span className="counter">{cart.find(item => item.id === product.id)?.quantity || null}</span>
+                                    </div>
                                 </div>
                             </div>
                         ))}

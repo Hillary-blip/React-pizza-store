@@ -11,6 +11,7 @@
     gap: 13px;
     justify-content: center;
     font-weight: 700;
+    cursor: pointer;
 }
 
 .cart-price {
